@@ -1,13 +1,6 @@
 let allItems = [];
 
 window.addEventListener('DOMContentLoaded', function () {
-  console.log("Page loaded. Tabletop is:", typeof Tabletop); // debug
-
-  if (typeof Tabletop === 'undefined') {
-    console.error('❌ Tabletop failed to load!');
-    return;
-  }
-
   const publicSpreadsheetUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vR2eieTS57RhVUkWUu-2JwixQn2sAWyEYdcgb4JJn4K0qs6vDdrdOS-593pf0Jxm1_MSqv8w_6xlJj5/pubhtml';
 
   Tabletop.init({
@@ -20,11 +13,12 @@ window.addEventListener('DOMContentLoaded', function () {
     document.getElementById('filterPanel').classList.toggle('show');
   });
 
-  // Add filter event listeners
   document.addEventListener('change', (e) => {
-    if (e.target.classList.contains('include-filter') || 
-        e.target.classList.contains('exclude-filter') || 
-        e.target.id === 'dateRange') {
+    if (
+      e.target.classList.contains('include-filter') ||
+      e.target.classList.contains('exclude-filter') ||
+      e.target.id === 'dateRange'
+    ) {
       applyFilters();
     }
   });
@@ -39,6 +33,11 @@ function showItems(data) {
   const container = document.getElementById('itemsContainer');
   container.innerHTML = '';
 
+  if (!data || data.length === 0) {
+    container.innerHTML = '<p>No items to display.</p>';
+    return;
+  }
+
   data.forEach(item => {
     const card = document.createElement('div');
     card.className = 'card';
@@ -50,23 +49,24 @@ function showItems(data) {
     }
 
     const title = document.createElement('h3');
-    title.textContent = item['Item Name'];
+    title.textContent = item['Item Name'] || 'Unnamed';
     card.appendChild(title);
 
     const category = document.createElement('p');
-    category.textContent = `Category: ${item['Category']}`;
+    category.textContent = `Category: ${item['Category'] || 'N/A'}`;
     card.appendChild(category);
 
     const location = document.createElement('p');
-    location.textContent = `Location: ${item['Location Found']}`;
+    location.textContent = `Location: ${item['Location Found'] || 'N/A'}`;
     card.appendChild(location);
 
     const date = document.createElement('p');
-    date.textContent = `Date Found: ${new Date(item['Date Found']).toLocaleDateString()}`;
+    const rawDate = item['Timestamp']; // Use form timestamp
+    date.textContent = `Date Found: ${new Date(rawDate).toLocaleDateString()}`;
     card.appendChild(date);
 
     const desc = document.createElement('p');
-    desc.textContent = item['Description'];
+    desc.textContent = item['Description'] || '';
     card.appendChild(desc);
 
     container.appendChild(card);
@@ -74,44 +74,42 @@ function showItems(data) {
 }
 
 function applyFilters() {
-  const includeFilters = Array.from(document.querySelectorAll('.include-filter:checked')).map(cb => cb.value);
-  const excludeFilters = Array.from(document.querySelectorAll('.exclude-filter:checked')).map(cb => cb.value);
+  const includeFilters = Array.from(document.querySelectorAll('.include-filter:checked')).map(cb => cb.value.toLowerCase());
+  const excludeFilters = Array.from(document.querySelectorAll('.exclude-filter:checked')).map(cb => cb.value.toLowerCase());
   const dateRange = document.getElementById('dateRange').value;
 
-  let filteredItems = allItems.filter(item => {
+  const filteredItems = allItems.filter(item => {
     const category = item['Category']?.toLowerCase();
     const location = item['Location Found']?.toLowerCase();
-    const dateFound = new Date(item['Date Found']);
+    const dateFound = new Date(item['Timestamp']);
     const now = new Date();
 
-    // Include filters (if any selected, item must match at least one)
+    // Include Filters
     if (includeFilters.length > 0) {
-      const matches = includeFilters.some(filter => 
+      const matches = includeFilters.some(filter =>
         category?.includes(filter) || location?.includes(filter)
       );
       if (!matches) return false;
     }
 
-    // Exclude filters (if any selected, item must not match any)
+    // Exclude Filters
     if (excludeFilters.length > 0) {
-      const matches = excludeFilters.some(filter => 
+      const matches = excludeFilters.some(filter =>
         category?.includes(filter) || location?.includes(filter)
       );
       if (matches) return false;
     }
 
-    // Date range filter
+    // Date Range Filter
     if (dateRange !== 'all') {
       const dayMs = 24 * 60 * 60 * 1000;
       let cutoff;
-      
       switch (dateRange) {
         case 'day': cutoff = new Date(now - dayMs); break;
         case 'week': cutoff = new Date(now - 7 * dayMs); break;
         case 'month': cutoff = new Date(now - 30 * dayMs); break;
         case 'semester': cutoff = new Date(now - 120 * dayMs); break;
       }
-      
       if (dateFound < cutoff) return false;
     }
 
