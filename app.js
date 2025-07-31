@@ -8,7 +8,7 @@ window.addEventListener('DOMContentLoaded', function () {
     return;
   }
 
-  const publicSpreadsheetUrl = 'https://docs.google.com/spreadsheets/d/1aNyI_tF-7dopONbWz6RmhT8mOrxw5YbJhyQ93onhzcs/edit?usp=sharing';
+  const publicSpreadsheetUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vR2eieTS57RhVUkWUu-2JwixQn2sAWyEYdcgb4JJn4K0qs6vDdrdOS-593pf0Jxm1_MSqv8w_6xlJj5/pubhtml';
 
   Tabletop.init({
     key: publicSpreadsheetUrl,
