@@ -32,59 +32,54 @@ button {
 
 .filters {
   display: none;
-  flex-direction: column;
-  background: #eee;
   padding: 1rem;
+  background: #f3f3f3;
   border-top: 2px solid #ccc;
-  gap: 0.8rem;
 }
 
 .filters.show {
+  display: block;
+}
+
+.filter-columns {
   display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
 }
 
-/* Make all checkboxes visible and neatly spaced */
-.filters summary {
-  font-weight: bold;
-  cursor: pointer;
-  margin-bottom: 0.5rem;
+.filter-block {
+  min-width: 200px;
+  max-height: 300px;
+  overflow-y: auto;
+  padding-right: 1rem;
 }
 
-.filters details {
-  margin-left: 1rem;
-  padding: 0.4rem 0;
+.filter-block h3 {
+  margin-top: 0;
+  color: var(--primary-color);
 }
 
-.filters label {
+label {
   display: flex;
   align-items: center;
   gap: 0.5rem;
   margin: 0.3rem 0;
 }
 
-/* Fix checkbox size for better visibility */
-.filters input[type="checkbox"] {
-  transform: scale(1.2);
-  cursor: pointer;
-}
-
-/* Optional: cleaner select dropdown */
-select#dateRange {
+select {
   padding: 0.4rem;
-  border-radius: 5px;
+  border-radius: 4px;
   border: 1px solid #aaa;
-  width: fit-content;
-  margin-top: 0.5rem;
 }
 
-/* Form Section */
+/* Form section */
 .form-section {
   background: #f0f0f0;
   padding: 1rem;
   text-align: center;
 }
 
-/* Cards Grid */
+/* Grid cards */
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));

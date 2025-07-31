@@ -1,4 +1,4 @@
-const publicSpreadsheetUrl = 'YOUR_SHEET_URL';
+const publicSpreadsheetUrl = 'https://docs.google.com/spreadsheets/d/1aNyI_tF-7dopONbWz6RmhT8mOrxw5YbJhyQ93onhzcs/edit?usp=sharing';
 
 window.addEventListener('DOMContentLoaded', () => {
   Tabletop.init({
@@ -8,7 +8,6 @@ window.addEventListener('DOMContentLoaded', () => {
   });
 
   document.getElementById('toggleFilters').addEventListener('click', () => {
-    console.log('Toggle clicked');
     document.getElementById('filterPanel').classList.toggle('show');
   });
 });
@@ -50,4 +49,3 @@ function showItems(data) {
     container.appendChild(card);
   });
 }
-

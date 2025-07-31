@@ -13,76 +13,71 @@
     <p>Search, filter, or report lost and found items</p>
   </header>
 
-  <!-- Toggle Filter Panel -->
+  <!-- Filter Toggle -->
   <button id="toggleFilters">Filters ▼</button>
 
-  <!-- Filter Section -->
+  <!-- Filter Panel -->
   <section id="filterPanel" class="filters">
-    <!-- Include Filters -->
-    <details>
-      <summary>Include Filters</summary>
-      <details>
-        <summary>Category</summary>
+    <div class="filter-columns">
+      <!-- Included Filters -->
+      <div class="filter-block">
+        <h3>Include</h3>
+        <h4>Category</h4>
         <label><input type="checkbox" class="include-filter" value="backpack"> Backpack</label>
         <label><input type="checkbox" class="include-filter" value="electronics"> Electronics</label>
         <label><input type="checkbox" class="include-filter" value="clothing"> Clothing</label>
-      </details>
-      <details>
-        <summary>Location</summary>
+
+        <h4>Location</h4>
         <label><input type="checkbox" class="include-filter" value="library"> Library</label>
         <label><input type="checkbox" class="include-filter" value="hallway"> Hallway</label>
         <label><input type="checkbox" class="include-filter" value="cafeteria"> Cafeteria</label>
         <label><input type="checkbox" class="include-filter" value="gym"> Gym</label>
         <label><input type="checkbox" class="include-filter" value="quad"> Quad</label>
         <label><input type="checkbox" class="include-filter" value="pool"> Pool</label>
-      </details>
-    </details>
+      </div>
 
-    <!-- Exclude Filters -->
-    <details>
-      <summary>Exclude Filters</summary>
-      <details>
-        <summary>Category</summary>
+      <!-- Excluded Filters -->
+      <div class="filter-block">
+        <h3>Exclude</h3>
+        <h4>Category</h4>
         <label><input type="checkbox" class="exclude-filter" value="backpack"> Backpack</label>
         <label><input type="checkbox" class="exclude-filter" value="electronics"> Electronics</label>
         <label><input type="checkbox" class="exclude-filter" value="clothing"> Clothing</label>
-      </details>
-      <details>
-        <summary>Location</summary>
+
+        <h4>Location</h4>
         <label><input type="checkbox" class="exclude-filter" value="library"> Library</label>
         <label><input type="checkbox" class="exclude-filter" value="hallway"> Hallway</label>
         <label><input type="checkbox" class="exclude-filter" value="cafeteria"> Cafeteria</label>
         <label><input type="checkbox" class="exclude-filter" value="gym"> Gym</label>
         <label><input type="checkbox" class="exclude-filter" value="quad"> Quad</label>
         <label><input type="checkbox" class="exclude-filter" value="pool"> Pool</label>
-      </details>
-    </details>
+      </div>
 
-    <!-- Date Filter -->
-    <h3>Date Range</h3>
-    <select id="dateRange">
-      <option value="all">All Dates</option>
-      <option value="day">Past Day</option>
-      <option value="week">Past Week</option>
-      <option value="month">Past Month</option>
-      <option value="semester">This Semester</option>
-    </select>
+      <!-- Date Range Filter -->
+      <div class="filter-block">
+        <h3>Date Range</h3>
+        <select id="dateRange">
+          <option value="all">All Dates</option>
+          <option value="day">Past Day</option>
+          <option value="week">Past Week</option>
+          <option value="month">Past Month</option>
+          <option value="semester">This Semester</option>
+        </select>
+      </div>
+    </div>
   </section>
 
-  <!-- Report Form Button -->
+  <!-- Add Item -->
   <section class="form-section">
     <h2>Report a Found Item</h2>
-    <a href="https://docs.google.com/forms/d/e/1FAIpQLSciM4HYYe1sbYA5c65pyWQKjeWauXuPdXhfk4LDkepNr_5eQQ/viewform?usp=sharing&ouid=113219011188691329780" target="_blank">
+    <a href="https://docs.google.com/forms/d/e/YOUR_FORM_ID/viewform" target="_blank">
       <button>Add Item</button>
     </a>
   </section>
 
-  <!-- Cards Container -->
-  <section id="itemsContainer" class="grid">
-    <!-- Cards injected here -->
-  </section>
+  <!-- Card Container -->
+  <section id="itemsContainer" class="grid"></section>
 
-  <!-- JavaScript -->
   <script src="app.js"></script>
 </body>
 </html>
