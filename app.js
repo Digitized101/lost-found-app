@@ -1,3 +1,5 @@
+let allItems = [];
+
 window.addEventListener('DOMContentLoaded', function () {
   console.log("Page loaded. Tabletop is:", typeof Tabletop); // debug
 
@@ -10,14 +12,28 @@ window.addEventListener('DOMContentLoaded', function () {
 
   Tabletop.init({
     key: publicSpreadsheetUrl,
-    callback: showItems,
+    callback: initializeData,
     simpleSheet: true
   });
 
   document.getElementById('toggleFilters').addEventListener('click', () => {
     document.getElementById('filterPanel').classList.toggle('show');
   });
+
+  // Add filter event listeners
+  document.addEventListener('change', (e) => {
+    if (e.target.classList.contains('include-filter') || 
+        e.target.classList.contains('exclude-filter') || 
+        e.target.id === 'dateRange') {
+      applyFilters();
+    }
+  });
 });
+
+function initializeData(data) {
+  allItems = data;
+  showItems(data);
+}
 
 function showItems(data) {
   const container = document.getElementById('itemsContainer');
@@ -55,4 +71,52 @@ function showItems(data) {
 
     container.appendChild(card);
   });
+}
+
+function applyFilters() {
+  const includeFilters = Array.from(document.querySelectorAll('.include-filter:checked')).map(cb => cb.value);
+  const excludeFilters = Array.from(document.querySelectorAll('.exclude-filter:checked')).map(cb => cb.value);
+  const dateRange = document.getElementById('dateRange').value;
+
+  let filteredItems = allItems.filter(item => {
+    const category = item['Category']?.toLowerCase();
+    const location = item['Location Found']?.toLowerCase();
+    const dateFound = new Date(item['Date Found']);
+    const now = new Date();
+
+    // Include filters (if any selected, item must match at least one)
+    if (includeFilters.length > 0) {
+      const matches = includeFilters.some(filter => 
+        category?.includes(filter) || location?.includes(filter)
+      );
+      if (!matches) return false;
+    }
+
+    // Exclude filters (if any selected, item must not match any)
+    if (excludeFilters.length > 0) {
+      const matches = excludeFilters.some(filter => 
+        category?.includes(filter) || location?.includes(filter)
+      );
+      if (matches) return false;
+    }
+
+    // Date range filter
+    if (dateRange !== 'all') {
+      const dayMs = 24 * 60 * 60 * 1000;
+      let cutoff;
+      
+      switch (dateRange) {
+        case 'day': cutoff = new Date(now - dayMs); break;
+        case 'week': cutoff = new Date(now - 7 * dayMs); break;
+        case 'month': cutoff = new Date(now - 30 * dayMs); break;
+        case 'semester': cutoff = new Date(now - 120 * dayMs); break;
+      }
+      
+      if (dateFound < cutoff) return false;
+    }
+
+    return true;
+  });
+
+  showItems(filteredItems);
 }
