@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Lost & Found</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://unpkg.com/tabletop@1.6.0/tabletop.js"></script>
+</head>
+<body>
+  <header>
+    <h1>School Lost & Found</h1>
+    <p>Search, filter, or report lost and found items</p>
+  </header>
+
+  <button id="toggleFilters">Filters ▼</button>
+
+  <section id="filterPanel" class="filters hidden">
+    <details>
+      <summary>Include Filters</summary>
+      <details>
+        <summary>Category</summary>
+        <label><input type="checkbox" class="include-filter" value="backpack"> Backpack</label>
+        <label><input type="checkbox" class="include-filter" value="electronics"> Electronics</label>
+        <label><input type="checkbox" class="include-filter" value="clothing"> Clothing</label>
+      </details>
+      <details>
+        <summary>Location</summary>
+        <label><input type="checkbox" class="include-filter" value="library"> Library</label>
+        <label><input type="checkbox" class="include-filter" value="hallway"> Hallway</label>
+        <label><input type="checkbox" class="include-filter" value="cafeteria"> Cafeteria</label>
+        <label><input type="checkbox" class="include-filter" value="gym"> Gym</label>
+        <label><input type="checkbox" class="include-filter" value="quad"> Quad</label>
+        <label><input type="checkbox" class="include-filter" value="pool"> Pool</label>
+      </details>
+    </details>
+
+    <details>
+      <summary>Exclude Filters</summary>
+      <details>
+        <summary>Category</summary>
+        <label><input type="checkbox" class="exclude-filter" value="backpack"> Backpack</label>
+        <label><input type="checkbox" class="exclude-filter" value="electronics"> Electronics</label>
+        <label><input type="checkbox" class="exclude-filter" value="clothing"> Clothing</label>
+      </details>
+      <details>
+        <summary>Location</summary>
+        <label><input type="checkbox" class="exclude-filter" value="library"> Library</label>
+        <label><input type="checkbox" class="exclude-filter" value="hallway"> Hallway</label>
+        <label><input type="checkbox" class="exclude-filter" value="cafeteria"> Cafeteria</label>
+        <label><input type="checkbox" class="exclude-filter" value="gym"> Gym</label>
+        <label><input type="checkbox" class="exclude-filter" value="quad"> Quad</label>
+        <label><input type="checkbox" class="exclude-filter" value="pool"> Pool</label>
+      </details>
+    </details>
+
+    <h3>Date Range</h3>
+    <select id="dateRange">
+      <option value="all">All Dates</option>
+      <option value="day">Past Day</option>
+      <option value="week">Past Week</option>
+      <option value="month">Past Month</option>
+      <option value="semester">This Semester</option>
+    </select>
+  </section>
+
+  <section class="form-section">
+    <h2>Report a Found Item</h2>
+    <a href="https://docs.google.com/forms/d/e/YOUR_FORM_ID/viewform" target="_blank">
+      <button>Add Item</button>
+    </a>
+  </section>
+
+  <section id="itemsContainer" class="grid">
+    <!-- Cards injected here -->
+  </section>
+
+  <script src="app.js"></script>
+</body>
+</html>
+
