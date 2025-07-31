@@ -1,6 +1,13 @@
-const publicSpreadsheetUrl = 'https://docs.google.com/spreadsheets/d/1aNyI_tF-7dopONbWz6RmhT8mOrxw5YbJhyQ93onhzcs/edit?usp=sharing';
+window.addEventListener('DOMContentLoaded', function () {
+  console.log("Page loaded. Tabletop is:", typeof Tabletop); // debug
 
-window.addEventListener('DOMContentLoaded', () => {
+  if (typeof Tabletop === 'undefined') {
+    console.error('❌ Tabletop failed to load!');
+    return;
+  }
+
+  const publicSpreadsheetUrl = 'https://docs.google.com/spreadsheets/d/1aNyI_tF-7dopONbWz6RmhT8mOrxw5YbJhyQ93onhzcs/edit?usp=sharing';
+
   Tabletop.init({
     key: publicSpreadsheetUrl,
     callback: showItems,
