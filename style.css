@@ -40,7 +40,7 @@ button:hover {
 .filters {
   display: none;
   padding: 1.5rem;
-  background: white;
+  background: black;
   border: 3px solid var(--secondary-color);
   margin: 0 1rem;
   border-radius: 10px;
@@ -48,7 +48,7 @@ button:hover {
 }
 
 .filters.show {
-  display: block;
+  display: flex;
 }
 
 .filter-columns {
