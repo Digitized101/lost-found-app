@@ -13,9 +13,12 @@
     <p>Search, filter, or report lost and found items</p>
   </header>
 
+  <!-- Toggle Filter Panel -->
   <button id="toggleFilters">Filters ▼</button>
 
-  <section id="filterPanel" class="filters hidden">
+  <!-- Filter Section -->
+  <section id="filterPanel" class="filters">
+    <!-- Include Filters -->
     <details>
       <summary>Include Filters</summary>
       <details>
@@ -35,6 +38,7 @@
       </details>
     </details>
 
+    <!-- Exclude Filters -->
     <details>
       <summary>Exclude Filters</summary>
       <details>
@@ -54,6 +58,7 @@
       </details>
     </details>
 
+    <!-- Date Filter -->
     <h3>Date Range</h3>
     <select id="dateRange">
       <option value="all">All Dates</option>
@@ -64,6 +69,7 @@
     </select>
   </section>
 
+  <!-- Report Form Button -->
   <section class="form-section">
     <h2>Report a Found Item</h2>
     <a href="https://docs.google.com/forms/d/e/1FAIpQLSciM4HYYe1sbYA5c65pyWQKjeWauXuPdXhfk4LDkepNr_5eQQ/viewform?usp=sharing&ouid=113219011188691329780" target="_blank">
@@ -71,11 +77,12 @@
     </a>
   </section>
 
+  <!-- Cards Container -->
   <section id="itemsContainer" class="grid">
     <!-- Cards injected here -->
   </section>
 
+  <!-- JavaScript -->
   <script src="app.js"></script>
 </body>
 </html>
-

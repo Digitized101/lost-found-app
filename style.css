@@ -35,11 +35,30 @@ button {
   flex-direction: column;
   background: #eee;
   padding: 1rem;
+  border-top: 2px solid #ccc;
+  gap: 0.8rem;
 }
 
 .filters.show {
   display: flex;
 }
+
+/* Add spacing for each summary and details block */
+.filters summary {
+  font-weight: bold;
+  cursor: pointer;
+  margin-bottom: 0.5rem;
+}
+
+.filters details {
+  margin-left: 1rem;
+}
+
+.filters label {
+  display: block;
+  margin: 0.2rem 0;
+}
+
 
 .form-section {
   background: #f0f0f0;
