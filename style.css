@@ -43,7 +43,7 @@ button {
   display: flex;
 }
 
-/* Add spacing for each summary and details block */
+/* Make all checkboxes visible and neatly spaced */
 .filters summary {
   font-weight: bold;
   cursor: pointer;
@@ -52,20 +52,39 @@ button {
 
 .filters details {
   margin-left: 1rem;
+  padding: 0.4rem 0;
 }
 
 .filters label {
-  display: block;
-  margin: 0.2rem 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0.3rem 0;
 }
 
+/* Fix checkbox size for better visibility */
+.filters input[type="checkbox"] {
+  transform: scale(1.2);
+  cursor: pointer;
+}
 
+/* Optional: cleaner select dropdown */
+select#dateRange {
+  padding: 0.4rem;
+  border-radius: 5px;
+  border: 1px solid #aaa;
+  width: fit-content;
+  margin-top: 0.5rem;
+}
+
+/* Form Section */
 .form-section {
   background: #f0f0f0;
   padding: 1rem;
   text-align: center;
 }
 
+/* Cards Grid */
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -79,6 +98,11 @@ button {
   box-shadow: 0 2px 5px rgba(0,0,0,0.1);
   padding: 1rem;
   text-align: center;
+  transition: transform 0.2s;
+}
+
+.card:hover {
+  transform: scale(1.02);
 }
 
 .card img {
@@ -87,4 +111,3 @@ button {
   object-fit: cover;
   border-radius: 5px;
 }
-
