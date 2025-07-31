@@ -8,6 +8,7 @@ window.addEventListener('DOMContentLoaded', () => {
   });
 
   document.getElementById('toggleFilters').addEventListener('click', () => {
+    console.log('Toggle clicked');
     document.getElementById('filterPanel').classList.toggle('show');
   });
 });
