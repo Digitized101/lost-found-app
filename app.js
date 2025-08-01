@@ -30,6 +30,18 @@ window.addEventListener('DOMContentLoaded', function () {
       applyFilters();
     }
   });
+
+  document.addEventListener('click', (e) => {
+    if (e.target.classList.contains('filter-section-toggle') || e.target.parentElement.classList.contains('filter-section-toggle')) {
+      const button = e.target.classList.contains('filter-section-toggle') ? e.target : e.target.parentElement;
+      const targetId = button.getAttribute('data-target');
+      const panel = document.getElementById(targetId);
+      const icon = button.querySelector('.toggle-icon');
+      
+      panel.classList.toggle('show');
+      icon.textContent = panel.classList.contains('show') ? '▲' : '▼';
+    }
+  });
 });
 
 function parseCSV(csvText) {

@@ -23,36 +23,46 @@
     <div class="filter-columns">
       <!-- Included Filters -->
       <div class="filter-block">
-        <h3>Include</h3>
-        <h4>Category</h4>
-        <label><input type="checkbox" class="include-filter" value="backpack"> Backpack</label>
-        <label><input type="checkbox" class="include-filter" value="electronics"> Electronics</label>
-        <label><input type="checkbox" class="include-filter" value="clothing"> Clothing</label>
+        <button class="filter-section-toggle" data-target="includePanel">
+          <span>Include</span>
+          <span class="toggle-icon">▼</span>
+        </button>
+        <div id="includePanel" class="filter-section">
+          <h4>Category</h4>
+          <label><input type="checkbox" class="include-filter" value="backpack"> Backpack</label>
+          <label><input type="checkbox" class="include-filter" value="electronics"> Electronics</label>
+          <label><input type="checkbox" class="include-filter" value="clothing"> Clothing</label>
 
-        <h4>Location</h4>
-        <label><input type="checkbox" class="include-filter" value="library"> Library</label>
-        <label><input type="checkbox" class="include-filter" value="hallway"> Hallway</label>
-        <label><input type="checkbox" class="include-filter" value="cafeteria"> Cafeteria</label>
-        <label><input type="checkbox" class="include-filter" value="gym"> Gym</label>
-        <label><input type="checkbox" class="include-filter" value="quad"> Quad</label>
-        <label><input type="checkbox" class="include-filter" value="pool"> Pool</label>
+          <h4>Location</h4>
+          <label><input type="checkbox" class="include-filter" value="library"> Library</label>
+          <label><input type="checkbox" class="include-filter" value="hallway"> Hallway</label>
+          <label><input type="checkbox" class="include-filter" value="cafeteria"> Cafeteria</label>
+          <label><input type="checkbox" class="include-filter" value="gym"> Gym</label>
+          <label><input type="checkbox" class="include-filter" value="quad"> Quad</label>
+          <label><input type="checkbox" class="include-filter" value="pool"> Pool</label>
+        </div>
       </div>
 
       <!-- Excluded Filters -->
       <div class="filter-block">
-        <h3>Exclude</h3>
-        <h4>Category</h4>
-        <label><input type="checkbox" class="exclude-filter" value="backpack"> Backpack</label>
-        <label><input type="checkbox" class="exclude-filter" value="electronics"> Electronics</label>
-        <label><input type="checkbox" class="exclude-filter" value="clothing"> Clothing</label>
+        <button class="filter-section-toggle" data-target="excludePanel">
+          <span>Exclude</span>
+          <span class="toggle-icon">▼</span>
+        </button>
+        <div id="excludePanel" class="filter-section">
+          <h4>Category</h4>
+          <label><input type="checkbox" class="exclude-filter" value="backpack"> Backpack</label>
+          <label><input type="checkbox" class="exclude-filter" value="electronics"> Electronics</label>
+          <label><input type="checkbox" class="exclude-filter" value="clothing"> Clothing</label>
 
-        <h4>Location</h4>
-        <label><input type="checkbox" class="exclude-filter" value="library"> Library</label>
-        <label><input type="checkbox" class="exclude-filter" value="hallway"> Hallway</label>
-        <label><input type="checkbox" class="exclude-filter" value="cafeteria"> Cafeteria</label>
-        <label><input type="checkbox" class="exclude-filter" value="gym"> Gym</label>
-        <label><input type="checkbox" class="exclude-filter" value="quad"> Quad</label>
-        <label><input type="checkbox" class="exclude-filter" value="pool"> Pool</label>
+          <h4>Location</h4>
+          <label><input type="checkbox" class="exclude-filter" value="library"> Library</label>
+          <label><input type="checkbox" class="exclude-filter" value="hallway"> Hallway</label>
+          <label><input type="checkbox" class="exclude-filter" value="cafeteria"> Cafeteria</label>
+          <label><input type="checkbox" class="exclude-filter" value="gym"> Gym</label>
+          <label><input type="checkbox" class="exclude-filter" value="quad"> Quad</label>
+          <label><input type="checkbox" class="exclude-filter" value="pool"> Pool</label>
+        </div>
       </div>
 
       <!-- Date Range Filter -->
