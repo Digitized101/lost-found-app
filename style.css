@@ -70,10 +70,11 @@ button:hover {
   font-weight: bold;
   cursor: pointer;
   border-radius: 5px;
-  margin: 0 0 10px 0;
+  margin: 0 0 5px 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  transition: all 0.2s ease;
 }
 
 .filter-section-toggle:hover {
@@ -82,15 +83,17 @@ button:hover {
 }
 
 .filter-section {
-  display: none;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
 }
 
 .filter-section.show {
-  display: block;
+  max-height: 300px;
 }
 
 .filter-block h4 {
-  color: black;
+  color: #1e3a8a;
   margin: 15px 0 10px 0;
   font-size: 16px;
 }
@@ -99,8 +102,12 @@ label {
   display: block;
   margin: 8px 0;
   font-size: 14px;
-  color: #1e3a8a;
+  color: black;
   cursor: pointer;
+}
+
+.toggle-icon {
+  transition: transform 0.3s ease;
 }
 
 input[type="checkbox"] {
