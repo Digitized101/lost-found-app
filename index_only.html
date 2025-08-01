@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Lost & Found</title>
+  
+</head>
+<body>
+  <header>
+    <h1>School Lost & Found</h1>
+    <p>Search, filter, or report lost and found items</p>
+  </header>
+
+  <!-- Filter Toggle -->
+  <button id="toggleFilters">Filters ▼</button>
+
+  <!-- Filter Panel -->
+  <section id="filterPanel" class="filters">
+    <div class="filter-columns">
+      <!-- Included Filters -->
+      <div class="filter-block">
+        <h3>Include</h3>
+        <h4>Category</h4>
+        <label><input type="checkbox" class="include-filter" value="backpack"> Backpack</label>
+        <label><input type="checkbox" class="include-filter" value="electronics"> Electronics</label>
+        <label><input type="checkbox" class="include-filter" value="clothing"> Clothing</label>
+
+        <h4>Location</h4>
+        <label><input type="checkbox" class="include-filter" value="library"> Library</label>
+        <label><input type="checkbox" class="include-filter" value="hallway"> Hallway</label>
+        <label><input type="checkbox" class="include-filter" value="cafeteria"> Cafeteria</label>
+        <label><input type="checkbox" class="include-filter" value="gym"> Gym</label>
+        <label><input type="checkbox" class="include-filter" value="quad"> Quad</label>
+        <label><input type="checkbox" class="include-filter" value="pool"> Pool</label>
+      </div>
+
+      <!-- Excluded Filters -->
+      <div class="filter-block">
+        <h3>Exclude</h3>
+        <h4>Category</h4>
+        <label><input type="checkbox" class="exclude-filter" value="backpack"> Backpack</label>
+        <label><input type="checkbox" class="exclude-filter" value="electronics"> Electronics</label>
+        <label><input type="checkbox" class="exclude-filter" value="clothing"> Clothing</label>
+
+        <h4>Location</h4>
+        <label><input type="checkbox" class="exclude-filter" value="library"> Library</label>
+        <label><input type="checkbox" class="exclude-filter" value="hallway"> Hallway</label>
+        <label><input type="checkbox" class="exclude-filter" value="cafeteria"> Cafeteria</label>
+        <label><input type="checkbox" class="exclude-filter" value="gym"> Gym</label>
+        <label><input type="checkbox" class="exclude-filter" value="quad"> Quad</label>
+        <label><input type="checkbox" class="exclude-filter" value="pool"> Pool</label>
+      </div>
+
+      <!-- Date Range Filter -->
+      <div class="filter-block">
+        <h3>Date Range</h3>
+        <select id="dateRange">
+          <option value="all">All Dates</option>
+          <option value="day">Past Day</option>
+          <option value="week">Past Week</option>
+          <option value="month">Past Month</option>
+          <option value="semester">This Semester</option>
+        </select>
+      </div>
+    </div>
+  </section>
+
+  <!-- Add Item -->
+  <section class="form-section">
+    <h2>Report a Found Item</h2>
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLSciM4HYYe1sbYA5c65pyWQKjeWauXuPdXhfk4LDkepNr_5eQQ/viewform?usp=header" target="_blank">
+      <button>Add Item</button>
+    </a>
+  </section>
+
+  <!-- Card Container -->
+  <section id="itemsContainer" class="grid"></section>
+</body>
+</html>
+
+
+

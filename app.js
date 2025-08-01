@@ -3,16 +3,24 @@ let allItems = [];
 window.addEventListener('DOMContentLoaded', function () {
   const publicSpreadsheetUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vR2eieTS57RhVUkWUu-2JwixQn2sAWyEYdcgb4JJn4K0qs6vDdrdOS-593pf0Jxm1_MSqv8w_6xlJj5/pubhtml';
 
+  // Toggle filter panel
+  const toggleBtn = document.getElementById("toggleFilters");
+  const filterPanel = document.getElementById("filterPanel");
+  const icon = document.getElementById("filterToggleIcon");
+
+  toggleBtn.addEventListener("click", () => {
+    filterPanel.classList.toggle("show");
+    icon.textContent = filterPanel.classList.contains("show") ? "▲" : "▼";
+  });
+
+  // Load data from Google Sheets
   Tabletop.init({
     key: publicSpreadsheetUrl,
     callback: initializeData,
     simpleSheet: true
   });
 
-  document.getElementById('toggleFilters').addEventListener('click', () => {
-    document.getElementById('filterPanel').classList.toggle('show');
-  });
-
+  // Filter listeners
   document.addEventListener('change', (e) => {
     if (
       e.target.classList.contains('include-filter') ||
@@ -61,7 +69,7 @@ function showItems(data) {
     card.appendChild(location);
 
     const date = document.createElement('p');
-    const rawDate = item['Timestamp']; // Use form timestamp
+    const rawDate = item['Timestamp'];
     date.textContent = `Date Found: ${new Date(rawDate).toLocaleDateString()}`;
     card.appendChild(date);
 
@@ -84,7 +92,7 @@ function applyFilters() {
     const dateFound = new Date(item['Timestamp']);
     const now = new Date();
 
-    // Include Filters
+    // Include logic
     if (includeFilters.length > 0) {
       const matches = includeFilters.some(filter =>
         category?.includes(filter) || location?.includes(filter)
@@ -92,7 +100,7 @@ function applyFilters() {
       if (!matches) return false;
     }
 
-    // Exclude Filters
+    // Exclude logic
     if (excludeFilters.length > 0) {
       const matches = excludeFilters.some(filter =>
         category?.includes(filter) || location?.includes(filter)
@@ -100,7 +108,7 @@ function applyFilters() {
       if (matches) return false;
     }
 
-    // Date Range Filter
+    // Date range
     if (dateRange !== 'all') {
       const dayMs = 24 * 60 * 60 * 1000;
       let cutoff;
