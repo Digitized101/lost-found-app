@@ -15,7 +15,10 @@ window.addEventListener('DOMContentLoaded', function () {
     });
 
   document.getElementById('toggleFilters').addEventListener('click', () => {
-    document.getElementById('filterPanel').classList.toggle('show');
+    const panel = document.getElementById('filterPanel');
+    const icon = document.getElementById('filterToggleIcon');
+    panel.classList.toggle('show');
+    icon.textContent = panel.classList.contains('show') ? '▲' : '▼';
   });
 
   document.addEventListener('change', (e) => {
@@ -31,17 +34,22 @@ window.addEventListener('DOMContentLoaded', function () {
 
 function parseCSV(csvText) {
   const lines = csvText.split('\n');
-  const headers = lines[0].split(',').map(h => h.replace(/"/g, '').trim());
   const data = [];
   
   for (let i = 1; i < lines.length; i++) {
     if (lines[i].trim()) {
       const values = lines[i].split(',').map(v => v.replace(/"/g, '').trim());
-      const item = {};
-      headers.forEach((header, index) => {
-        item[header] = values[index] || '';
-      });
-      data.push(item);
+      if (values.length > 5) {
+        const item = {
+          'Timestamp': values[0] || '',
+          'Item Name': values[1] || '',
+          'Category': values[2] || '',
+          'Location Found': values[3] || '',
+          'Description': values[4] || '',
+          'Upload Image': values[5] || ''
+        };
+        data.push(item);
+      }
     }
   }
   return data;
