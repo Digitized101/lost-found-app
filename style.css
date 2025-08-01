@@ -63,14 +63,14 @@ button:hover {
 .filter-section-toggle {
   width: 100%;
   background-color: #fbbf24;
-  color: #1e3a8a;
+  color: black;
   border: 2px solid #1e3a8a;
   padding: 8px 12px;
   font-size: 16px;
   font-weight: bold;
   cursor: pointer;
   border-radius: 5px;
-  margin-bottom: 10px;
+  margin: 0 0 10px 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -99,7 +99,7 @@ label {
   display: block;
   margin: 8px 0;
   font-size: 14px;
-  color: #1e3a8a;
+  color: black;
   cursor: pointer;
 }
 
