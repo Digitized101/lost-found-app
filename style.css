@@ -11,6 +11,7 @@ body {
   margin: 0;
   background: var(--background-color);
   color: var(--text-color);
+  overflow-x: hidden;
 }
 
 header {
@@ -44,6 +45,8 @@ button:hover {
   border: 3px solid #fbbf24;
   margin: 20px;
   border-radius: 10px;
+  width: calc(100% - 40px);
+  box-sizing: border-box;
 }
 
 .filters.show {
@@ -54,10 +57,13 @@ button:hover {
   display: flex;
   flex-wrap: wrap;
   gap: 30px;
+  width: 100%;
 }
 
 .filter-block {
   min-width: 200px;
+  flex: 1;
+  max-width: 300px;
 }
 
 .filter-section-toggle {
@@ -110,7 +116,7 @@ label {
   transition: transform 0.3s ease;
 }
 
-input[type="checkbox"] {
+input[type="checkbox"], input[type="radio"] {
   width: 18px;
   height: 18px;
   margin-right: 8px;

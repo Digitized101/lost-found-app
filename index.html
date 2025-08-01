@@ -67,14 +67,17 @@
 
       <!-- Date Range Filter -->
       <div class="filter-block">
-        <h3>Date Range</h3>
-        <select id="dateRange">
-          <option value="all">All Dates</option>
-          <option value="day">Past Day</option>
-          <option value="week">Past Week</option>
-          <option value="month">Past Month</option>
-          <option value="semester">This Semester</option>
-        </select>
+        <button class="filter-section-toggle" data-target="datePanel">
+          <span>Date Range</span>
+          <span class="toggle-icon">▼</span>
+        </button>
+        <div id="datePanel" class="filter-section">
+          <label><input type="radio" name="dateRange" value="all" checked> All Dates</label>
+          <label><input type="radio" name="dateRange" value="day"> Past Day</label>
+          <label><input type="radio" name="dateRange" value="week"> Past Week</label>
+          <label><input type="radio" name="dateRange" value="month"> Past Month</label>
+          <label><input type="radio" name="dateRange" value="semester"> This Semester</label>
+        </div>
       </div>
     </div>
   </section>
