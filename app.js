@@ -9,6 +9,7 @@ window.addEventListener('DOMContentLoaded', function () {
   const icon = document.getElementById("filterToggleIcon");
 
   toggleBtn.addEventListener("click", () => {
+    console.log("🔄 Filters toggled");
     filterPanel.classList.toggle("show");
     icon.textContent = filterPanel.classList.contains("show") ? "▲" : "▼";
   });
