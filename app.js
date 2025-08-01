@@ -1,27 +1,23 @@
 let allItems = [];
 
 window.addEventListener('DOMContentLoaded', function () {
-  const publicSpreadsheetUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vR2eieTS57RhVUkWUu-2JwixQn2sAWyEYdcgb4JJn4K0qs6vDdrdOS-593pf0Jxm1_MSqv8w_6xlJj5/pubhtml';
+  const csvUrl = 'https://docs.google.com/spreadsheets/d/1aNyI_tF-7dopONbWz6RmhT8mOrxw5YbJhyQ93onhzcs/export?format=csv';
+  
+  fetch(csvUrl)
+    .then(response => response.text())
+    .then(csvText => {
+      const data = parseCSV(csvText);
+      initializeData(data);
+    })
+    .catch(error => {
+      console.error('Error loading data:', error);
+      document.getElementById('itemsContainer').innerHTML = '<p>Unable to load items. Please try again later.</p>';
+    });
 
-  // Toggle filter panel
-  const toggleBtn = document.getElementById("toggleFilters");
-  const filterPanel = document.getElementById("filterPanel");
-  const icon = document.getElementById("filterToggleIcon");
-
-  toggleBtn.addEventListener("click", () => {
-    console.log("🔄 Filters toggled");
-    filterPanel.classList.toggle("show");
-    icon.textContent = filterPanel.classList.contains("show") ? "▲" : "▼";
+  document.getElementById('toggleFilters').addEventListener('click', () => {
+    document.getElementById('filterPanel').classList.toggle('show');
   });
 
-  // Load data from Google Sheets
-  Tabletop.init({
-    key: publicSpreadsheetUrl,
-    callback: initializeData,
-    simpleSheet: true
-  });
-
-  // Filter listeners
   document.addEventListener('change', (e) => {
     if (
       e.target.classList.contains('include-filter') ||
@@ -32,6 +28,24 @@ window.addEventListener('DOMContentLoaded', function () {
     }
   });
 });
+
+function parseCSV(csvText) {
+  const lines = csvText.split('\n');
+  const headers = lines[0].split(',').map(h => h.replace(/"/g, '').trim());
+  const data = [];
+  
+  for (let i = 1; i < lines.length; i++) {
+    if (lines[i].trim()) {
+      const values = lines[i].split(',').map(v => v.replace(/"/g, '').trim());
+      const item = {};
+      headers.forEach((header, index) => {
+        item[header] = values[index] || '';
+      });
+      data.push(item);
+    }
+  }
+  return data;
+}
 
 function initializeData(data) {
   allItems = data;
@@ -54,11 +68,12 @@ function showItems(data) {
     if (item['Upload Image']) {
       const img = document.createElement('img');
       img.src = item['Upload Image'];
+      img.alt = item['Item Name'] || 'Lost item';
       card.appendChild(img);
     }
 
     const title = document.createElement('h3');
-    title.textContent = item['Item Name'] || 'Unnamed';
+    title.textContent = item['Item Name'] || 'Unnamed Item';
     card.appendChild(title);
 
     const category = document.createElement('p');
@@ -70,47 +85,53 @@ function showItems(data) {
     card.appendChild(location);
 
     const date = document.createElement('p');
-    const rawDate = item['Timestamp'];
-    date.textContent = `Date Found: ${new Date(rawDate).toLocaleDateString()}`;
+    const timestamp = item['Timestamp'] || item['Date Found'];
+    if (timestamp) {
+      date.textContent = `Date: ${new Date(timestamp).toLocaleDateString()}`;
+    } else {
+      date.textContent = 'Date: N/A';
+    }
     card.appendChild(date);
 
-    const desc = document.createElement('p');
-    desc.textContent = item['Description'] || '';
-    card.appendChild(desc);
+    if (item['Description']) {
+      const desc = document.createElement('p');
+      desc.textContent = item['Description'];
+      card.appendChild(desc);
+    }
 
     container.appendChild(card);
   });
 }
 
 function applyFilters() {
+  if (allItems.length === 0) return;
+  
   const includeFilters = Array.from(document.querySelectorAll('.include-filter:checked')).map(cb => cb.value.toLowerCase());
   const excludeFilters = Array.from(document.querySelectorAll('.exclude-filter:checked')).map(cb => cb.value.toLowerCase());
   const dateRange = document.getElementById('dateRange').value;
 
   const filteredItems = allItems.filter(item => {
-    const category = item['Category']?.toLowerCase();
-    const location = item['Location Found']?.toLowerCase();
-    const dateFound = new Date(item['Timestamp']);
+    const category = item['Category']?.toLowerCase() || '';
+    const location = item['Location Found']?.toLowerCase() || '';
+    const timestamp = item['Timestamp'] || item['Date Found'];
+    const dateFound = timestamp ? new Date(timestamp) : new Date();
     const now = new Date();
 
-    // Include logic
     if (includeFilters.length > 0) {
       const matches = includeFilters.some(filter =>
-        category?.includes(filter) || location?.includes(filter)
+        category.includes(filter) || location.includes(filter)
       );
       if (!matches) return false;
     }
 
-    // Exclude logic
     if (excludeFilters.length > 0) {
       const matches = excludeFilters.some(filter =>
-        category?.includes(filter) || location?.includes(filter)
+        category.includes(filter) || location.includes(filter)
       );
       if (matches) return false;
     }
 
-    // Date range
-    if (dateRange !== 'all') {
+    if (dateRange !== 'all' && timestamp) {
       const dayMs = 24 * 60 * 60 * 1000;
       let cutoff;
       switch (dateRange) {
