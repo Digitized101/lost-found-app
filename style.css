@@ -39,8 +39,10 @@ button:hover {
 }
 
 .filters {
-  display: none;
-  padding: 20px;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease;
+  padding: 0 20px;
   background: white;
   border: 3px solid #fbbf24;
   margin: 20px;
@@ -50,7 +52,8 @@ button:hover {
 }
 
 .filters.show {
-  display: block !important;
+  max-height: 800px;
+  padding: 20px;
 }
 
 .filter-columns {
