@@ -95,7 +95,40 @@ button:hover {
 }
 
 .filter-section.show {
-  max-height: 300px;
+  max-height: 500px;
+}
+
+.filter-subsection-toggle {
+  width: 100%;
+  background-color: #1e3a8a;
+  color: #fbbf24;
+  border: 1px solid #fbbf24;
+  padding: 6px 10px;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 3px;
+  margin: 5px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: all 0.2s ease;
+}
+
+.filter-subsection-toggle:hover {
+  background-color: #fbbf24;
+  color: #1e3a8a;
+}
+
+.filter-subsection {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+  padding-left: 10px;
+}
+
+.filter-subsection.show {
+  max-height: 200px;
 }
 
 .filter-block h4 {

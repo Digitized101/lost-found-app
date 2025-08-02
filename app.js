@@ -23,7 +23,8 @@ window.addEventListener('DOMContentLoaded', function () {
 
   document.addEventListener('change', (e) => {
     if (
-      e.target.name === 'includeFilter' ||
+      e.target.name === 'includeCategory' ||
+      e.target.name === 'includeLocation' ||
       e.target.classList.contains('exclude-filter') ||
       e.target.name === 'dateRange'
     ) {
@@ -34,6 +35,16 @@ window.addEventListener('DOMContentLoaded', function () {
   document.addEventListener('click', (e) => {
     if (e.target.classList.contains('filter-section-toggle') || e.target.parentElement.classList.contains('filter-section-toggle')) {
       const button = e.target.classList.contains('filter-section-toggle') ? e.target : e.target.parentElement;
+      const targetId = button.getAttribute('data-target');
+      const panel = document.getElementById(targetId);
+      const icon = button.querySelector('.toggle-icon');
+      
+      panel.classList.toggle('show');
+      icon.textContent = panel.classList.contains('show') ? '▲' : '▼';
+    }
+    
+    if (e.target.classList.contains('filter-subsection-toggle') || e.target.parentElement.classList.contains('filter-subsection-toggle')) {
+      const button = e.target.classList.contains('filter-subsection-toggle') ? e.target : e.target.parentElement;
       const targetId = button.getAttribute('data-target');
       const panel = document.getElementById(targetId);
       const icon = button.querySelector('.toggle-icon');
@@ -126,7 +137,8 @@ function showItems(data) {
 function applyFilters() {
   if (allItems.length === 0) return;
   
-  const includeFilter = document.querySelector('input[name="includeFilter"]:checked')?.value || '';
+  const includeCategory = document.querySelector('input[name="includeCategory"]:checked')?.value || '';
+  const includeLocation = document.querySelector('input[name="includeLocation"]:checked')?.value || '';
   const excludeFilters = Array.from(document.querySelectorAll('.exclude-filter:checked')).map(cb => cb.value.toLowerCase());
   const dateRange = document.querySelector('input[name="dateRange"]:checked')?.value || 'all';
 
@@ -137,9 +149,12 @@ function applyFilters() {
     const dateFound = timestamp ? new Date(timestamp) : new Date();
     const now = new Date();
 
-    if (includeFilter && includeFilter !== '') {
-      const matches = category.includes(includeFilter.toLowerCase()) || location.includes(includeFilter.toLowerCase());
-      if (!matches) return false;
+    if (includeCategory && includeCategory !== '') {
+      if (!category.includes(includeCategory.toLowerCase())) return false;
+    }
+
+    if (includeLocation && includeLocation !== '') {
+      if (!location.includes(includeLocation.toLowerCase())) return false;
     }
 
     if (excludeFilters.length > 0) {
