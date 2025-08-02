@@ -23,9 +23,9 @@ window.addEventListener('DOMContentLoaded', function () {
 
   document.addEventListener('change', (e) => {
     if (
-      e.target.classList.contains('include-filter') ||
+      e.target.name === 'includeFilter' ||
       e.target.classList.contains('exclude-filter') ||
-      e.target.id === 'dateRange'
+      e.target.name === 'dateRange'
     ) {
       applyFilters();
     }
@@ -126,9 +126,9 @@ function showItems(data) {
 function applyFilters() {
   if (allItems.length === 0) return;
   
-  const includeFilters = Array.from(document.querySelectorAll('.include-filter:checked')).map(cb => cb.value.toLowerCase());
+  const includeFilter = document.querySelector('input[name="includeFilter"]:checked')?.value || '';
   const excludeFilters = Array.from(document.querySelectorAll('.exclude-filter:checked')).map(cb => cb.value.toLowerCase());
-  const dateRange = document.getElementById('dateRange').value;
+  const dateRange = document.querySelector('input[name="dateRange"]:checked')?.value || 'all';
 
   const filteredItems = allItems.filter(item => {
     const category = item['Category']?.toLowerCase() || '';
@@ -137,10 +137,8 @@ function applyFilters() {
     const dateFound = timestamp ? new Date(timestamp) : new Date();
     const now = new Date();
 
-    if (includeFilters.length > 0) {
-      const matches = includeFilters.some(filter =>
-        category.includes(filter) || location.includes(filter)
-      );
+    if (includeFilter && includeFilter !== '') {
+      const matches = category.includes(includeFilter.toLowerCase()) || location.includes(includeFilter.toLowerCase());
       if (!matches) return false;
     }
 

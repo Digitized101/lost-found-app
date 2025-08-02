@@ -116,11 +116,19 @@ label {
   transition: transform 0.3s ease;
 }
 
-input[type="checkbox"], input[type="radio"] {
+input[type="checkbox"] {
   width: 18px;
   height: 18px;
   margin-right: 8px;
   accent-color: #fbbf24;
+  cursor: pointer;
+}
+
+input[type="radio"] {
+  width: 18px;
+  height: 18px;
+  margin-right: 8px;
+  accent-color: #1e3a8a;
   cursor: pointer;
 }
 
